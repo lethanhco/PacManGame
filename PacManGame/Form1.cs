@@ -15,7 +15,28 @@ namespace PacManGame
 
 
         bool goup, godown, goleft, goright, isGameOver;
-        int score, playerSpeed, redGhostSpeed, blueGhostSpeed, yellowGhostX, yellowGhostY;
+        int score, playerSpeed, redGhostSpeed, blueGhostSpeed, yellowGhostSpeed, pinkGhostSpeed;
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void YellowGhost_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
         private void showGScreen(object sender, FormClosedEventArgs e)
         {
@@ -101,30 +122,30 @@ namespace PacManGame
             if (goleft == true)
             {
                 pacman.Left -= playerSpeed;
-                pacman.Image = Properties.Resources.ghost_red1;
+                pacman.Image = Properties.Resources.pacman5; // pacman qua phai     //Import ảnh trước khi chọn Resources
             }
             if (goright == true)
             {
                 pacman.Left += playerSpeed;
-                pacman.Image = Properties.Resources.ghost_blue;
+                pacman.Image = Properties.Resources.pacman5; // pacman qua trái  // lỗi 
             }
             if (godown == true)
             {
                 pacman.Top += playerSpeed;
-                pacman.Image = Properties.Resources.ghost_green;
+                pacman.Image = Properties.Resources.pacman5;   //pacman xuống dưới
             }
             if (goup == true)
             {
                 pacman.Top -= playerSpeed;
-                pacman.Image = Properties.Resources.ghost_yellow;
+                pacman.Image = Properties.Resources.pacman5;   //pacman lên trên
             }
 
 
             if (pacman.Left < -10)
             {
-                pacman.Left = 910;
+                pacman.Left = 830;
             }
-            if (pacman.Left > 910)
+            if (pacman.Left > 830)
             {
                 pacman.Left = -10;
             }
@@ -132,9 +153,9 @@ namespace PacManGame
 
             if (pacman.Top < -10)
             {
-                pacman.Top = 610;
+                pacman.Top = 600;
             }
-            if (pacman.Top > 610)
+            if (pacman.Top > 600)
             {
                 pacman.Top = -10;
             }
@@ -152,32 +173,55 @@ namespace PacManGame
                             x.Visible = false;
                         }
                    }
-                   if((string)x.Tag == "wall")
+                    if ((string)x.Tag == "Food" && x.Visible == true)
                     {
                         if (pacman.Bounds.IntersectsWith(x.Bounds))
                         {
-                            gameOver("ban da cham tuong");
+                            score += 5;
+                            x.Visible = false;
+                        }
+                    }
+                    if ((string)x.Tag == "wall")
+                    {
+                        if (pacman.Bounds.IntersectsWith(x.Bounds))
+                        {
+                            gameOver("Game Over");
                         }
                     }
                     if ((string)x.Tag == "ghot")
                     {
                         if (pacman.Bounds.IntersectsWith(x.Bounds))
                         {
-                            gameOver("ban da thua");
+                            gameOver("Game Over");
                         }
                     }
 
                 }
             }
-            redGhost.Top += redGhostSpeed;
+            redGhost.Left += redGhostSpeed;
+            buleGhost.Left += blueGhostSpeed;
+            YellowGhost.Top += yellowGhostSpeed;
+            PinkGhost.Top += pinkGhostSpeed;
 
-            if (redGhost.Bounds.IntersectsWith(wall2.Bounds) || redGhost.Bounds.IntersectsWith(wall4.Bounds))
+            if (redGhost.Bounds.IntersectsWith(wall5.Bounds) || redGhost.Bounds.IntersectsWith(wall6.Bounds))
             {
                 redGhostSpeed = -redGhostSpeed;
             }
-            if (score == 5)
+            if (buleGhost.Bounds.IntersectsWith(wall7.Bounds) || buleGhost.Bounds.IntersectsWith(wall8.Bounds))
             {
-                gameOver("ban da chien thang");
+                blueGhostSpeed = -blueGhostSpeed;
+            }
+            if (YellowGhost.Bounds.IntersectsWith(wall9.Bounds) || YellowGhost.Bounds.IntersectsWith(wall10.Bounds))
+            {
+                yellowGhostSpeed = -yellowGhostSpeed;
+            }
+            if (PinkGhost.Bounds.IntersectsWith(wall11.Bounds) || PinkGhost.Bounds.IntersectsWith(wall12.Bounds))
+            {
+                pinkGhostSpeed = -pinkGhostSpeed;
+            }
+            if (score == 50)
+            {
+                gameOver("OK. Bạn là nhất...:)))");
             }
 
 
@@ -188,20 +232,29 @@ namespace PacManGame
             labelScore.Text = "Diem: 0";
             score = 0;
 
-            playerSpeed = 8;
+            playerSpeed = 5;
 
-            redGhostSpeed = 5;
-            blueGhostSpeed = 5;
-            yellowGhostX = 5;
-            yellowGhostY = 5;
+            redGhostSpeed = 2;
+            blueGhostSpeed = 2;
+            yellowGhostSpeed = 2;
+            pinkGhostSpeed = 2;
 
             isGameOver = false;
 
-            pacman.Left = 12;
-            pacman.Top = 200;
+            pacman.Left = 238;
+            pacman.Top = 210;
 
-            redGhost.Left = 418;
-            redGhost.Top = 250;
+            redGhost.Left = 600;
+            redGhost.Top = 200;
+
+            buleGhost.Left = 200;
+            buleGhost.Top = 300;
+
+            YellowGhost.Left = 100;
+            YellowGhost.Top = 20;
+
+            PinkGhost.Left = 700;
+            PinkGhost.Top = 400;
 
             TimeGame.Start();
 
@@ -220,7 +273,7 @@ namespace PacManGame
             isGameOver = true;
 
             TimeGame.Stop();
-            labelScore.Text ="Diem" + score + Environment.NewLine + message;
+            lableWin.Text = message;
         }
     }
 }
