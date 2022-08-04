@@ -31,7 +31,8 @@ namespace PacManGame
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(462, 273);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Sử dụng các phím mũi tên để di chuyển.\r\n\r\nNhấn Enter để reset màn.";
+            this.label1.Text = "Sử dụng các phím mũi tên để di chuyển.\r\nChạm vào tường hoặc con ma sẽ game over :" +
+    "))\r\nNhấn Enter để reset màn.";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // HelpScreen

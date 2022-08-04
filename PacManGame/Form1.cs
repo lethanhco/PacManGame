@@ -111,6 +111,7 @@ namespace PacManGame
             if (e.KeyCode == Keys.Enter && isGameOver == true)
             {
                 resetGame();
+                lableWin.Text = "";
             }
         }
 
